@@ -7,6 +7,21 @@
     <title>Flask App</title>
 </head>
 <body>
-    <h1>Hello World</h1>
+        <table>
+        <tr>
+            <th>Task</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for task in tasks %}
+        <tr>
+            <td>{{ task.title }}</td>
+            <td>
+                <a href="delete/{{task.id}}">Delete</a> <br>
+                <a href="update/{{task.id}}">Update</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
 </body>
 </html>
