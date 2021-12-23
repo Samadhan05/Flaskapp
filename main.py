@@ -57,7 +57,6 @@ def add_task():
 def tasks():
 	return render_template('task.html',tasks=tasks)
 
-    return render_template('task.html')
 
 
 if __name__ == '__main__':
