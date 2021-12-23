@@ -3,31 +3,24 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tasks</title>
+    <title>Task</title>
 </head>
 
 <body>
-        <table>
-        <tr>
-            <th>Task</th>
-            <th>Actions</th>
-        </tr>
+    <h1>To-Do Task</h1>
+    {%if tasks == []:%}
+    <p>Task is empty</p>
+    {%endif%}
+    <ul>
+        {%for task in tasks%}
+        <li>{{task['title']}} - {{task['content']}} -
+            <input type="checkbox">
+            <a href="{{url_for('update', id=task.id)}}">Edit Task</a>
+        </li>
+        {%endfor%}
+    </ul>
 
-        {% for task in tasks %}
-        <tr>
-            <td>{{ task.title }}</td>
-            <td>
-                <a href="delete/{{task.id}}">Delete</a> <br>
-                <a href="update/{{task.id}}">Update</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-    <h1>Task List</h1>
-
-    <a href="{{url_for('add_task')}}">Add Task</a>
+    <a href="{{url_for('add_task')}}">Add New Task</a>
 </body>
 
 </html>
