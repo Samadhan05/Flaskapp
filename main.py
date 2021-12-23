@@ -57,7 +57,15 @@ def add_task():
 def tasks():
 	return render_template('task.html',tasks=tasks)
 
-
+@app.route('/delete/<int:id>')
+def delete(id):
+    task = Todo.query.get_or_404(id)
+    try:
+        db.session.delete(task)
+        db.session.commit()
+        return redirect('/')
+    except:
+        return "cannot delete"
 
 if __name__ == '__main__':
     app.run(debug=True)
