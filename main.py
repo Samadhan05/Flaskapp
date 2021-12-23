@@ -16,16 +16,6 @@ class Todo(db.Model):
     content = db.Column(db.String(300))
     iscomplete = db.Column(db.Boolean)
 
-
-@app.route('/update/<int:id>', methods=['GET','POST'])
-def update(id):
-    task = Todo.query.get_or_404(id)
-    print("\nTask:",task)
-    if request.method == 'POST':
-        task.title = request.form['Title']
-        task.content = request.form['Content']
-
-
 @app.route('/update/<int:id>', methods=['GET','POST'])
 def update(id):
     task = Todo.query.get_or_404(id)
