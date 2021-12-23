@@ -9,12 +9,23 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-
+# Create database
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100))
     content = db.Column(db.String(300))
     iscomplete = db.Column(db.Boolean)
+
+# Only run once database has been created
+# db.create_all()
+
+
+
+@app.route('/')
+def home():
+    todo_list = Todo.query.all()
+    return render_template("index.html", tasks=todo_list)
+
 
 @app.route('/update/<int:id>', methods=['GET','POST'])
 def update(id):
@@ -31,10 +42,6 @@ def update(id):
             return "connot update the task"
     else:
         return render_template('update.html', task=task)
-@app.route('/')
-def home():
-    todo_list = Todo.query.all()
-    return render_template("index.html", tasks=todo_list)
 
 
 @app.route('/add-task', methods=['GET', 'POST'])
