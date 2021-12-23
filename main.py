@@ -1,3 +1,4 @@
+
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
@@ -24,6 +25,14 @@ def update(id):
         task.title = request.form['Title']
         task.content = request.form['Content']
 
+
+@app.route('/update/<int:id>', methods=['GET','POST'])
+def update(id):
+    task = Todo.query.get_or_404(id)
+    print("\nTask:",task)
+    if request.method == 'POST':
+        task.title = request.form['Title']
+        task.content = request.form['Content']
 
         try:
             db.session.commit()
@@ -57,6 +66,7 @@ def add_task():
 @app.route('/tasks')
 def tasks():
 	return render_template('task.html',tasks=tasks)
+
     return render_template('task.html')
 
 
