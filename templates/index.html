@@ -16,6 +16,7 @@
         <li>{{task['title']}} - {{task['content']}} -
             <input type="checkbox">
             <a href="{{url_for('update', id=task.id)}}">Edit Task</a>
+            <a href="{{url_for('delete', id=task.id)}}">Delete Task</a>
         </li>
         {%endfor%}
     </ul>
